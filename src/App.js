@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import LocationsList from './components/LocationsList';
+import AddLocation from './components/AddLocation';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useState } from 'react';
+import Styled from "styled-components";
+
+const Div = Styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 function App() {
+  const [reload, setReload] = useState(false);
+
+  const handleReload = (status) => {
+    setReload(status);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Div>
+        <h1>Plan Ahead</h1>
+        <AddLocation handleReload={handleReload}/>
+        <Router>
+          <LocationsList reload={reload}/>
+        </Router>
+      </Div>
     </div>
   );
 }
