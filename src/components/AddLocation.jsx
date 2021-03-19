@@ -1,10 +1,10 @@
+
 import { useState } from 'react';
 import Styled from "styled-components";
 
-// const Title = Styled.h1`
-//   font-size: 64px;
-//   color: red;
-// `;
+const Input = Styled.input`
+  margin: 0 5px 0 5px;
+`;
 
 
 const AddLocation = ({ handleReload }) => {
@@ -17,7 +17,7 @@ const AddLocation = ({ handleReload }) => {
 
     const _handleSubmit = async (event) => {
         event.preventDefault();
-        const submitResponse = await fetch('http://127.0.0.1:3333/plans', {
+        const submitResponse = await fetch('http://127.0.0.1:3333/locations', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ location: location })
@@ -31,20 +31,24 @@ const AddLocation = ({ handleReload }) => {
         if (submitResponse.status === 200) {
             handleReload(true);
         }
+
     }
 
     return (
         <form onSubmit={_handleSubmit}>
             <label>Where are you going?
-                <input
+                <Input
                     type="text"
                     name="location"
                     value={location}
                     onChange={_handleLocationChange}/>
             </label>
             
-            <button type="submit">Add Location</button>
+            <button className="add-btn" type="submit">Add Location</button>
+            
         </form>
+        
+        
     )
 
 }

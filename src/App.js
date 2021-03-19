@@ -1,14 +1,13 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useState } from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
 import LocationsList from './components/LocationsList';
 import AddLocation from './components/AddLocation';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { useState } from 'react';
-import Styled from "styled-components";
+import AddPlans from './components/AddPlans';
+import PlansList from './components/PLansList';
 
-const Div = Styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
+
 
 function App() {
   const [reload, setReload] = useState(false);
@@ -18,15 +17,24 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Div>
-        <h1>Plan Ahead</h1>
-        <AddLocation handleReload={handleReload}/>
-        <Router>
-          <LocationsList reload={reload}/>
-        </Router>
-      </Div>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/locations">
+            <AddLocation handleReload={handleReload}/>
+            <LocationsList reload={reload}/>
+          </Route>
+          <Route exact path="/locations/:id">
+            <AddPlans handleReload={handleReload}/>
+            <PlansList reload={reload}/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from 'react'
-import { Route, Link, useHistory } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Styled from "styled-components";
 
 const Ul = Styled.ul`
@@ -17,30 +16,27 @@ const Button = Styled.button`
     color: red;
 `
 
-
-const LocationsList = ({ reload }) => {
-    const [locations, setLocations] = useState([]);
+const PlansList = ({ reload }) => {
+    const [plans, setPlans] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const locationsData = await(fetch('http://127.0.0.1:3333/locations').then(response => response.json()));
-            setLocations(locationsData);
-            console.log(locationsData);
+            const PlansData = await(fetch('http://127.0.0.1:3333/plans').then(response => response.json()));
+            setPlans(PlansData);
+            console.log(PlansData);
         })();
     },[reload])
 
     return (
         <>
-            {!!locations.length ? (
+            {!!plans.length ? (
                 <>
                     <Route path='/locations'>
                         <Ul>
-                            {locations.map((location, index) => {
+                            {plans.map((plan, index) => {
                                 return (
                                     <Li key={index}>
-                                        <Link style={{ textDecoration: 'none', color: '#333' }} to={`/locations/${location.slug}`}>
-                                            {location.location}
-                                        </Link>
+                                        {plan.day}--{plan.activity}
                                         <Button type="button">X</Button>
                                     </Li>
                                 )
@@ -55,4 +51,4 @@ const LocationsList = ({ reload }) => {
     )
 }
 
-export default LocationsList;
+export default PlansList;
