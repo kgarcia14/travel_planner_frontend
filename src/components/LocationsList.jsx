@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import { Route, Link, useHistory } from 'react-router-dom';
+import { Route, Link, useParams } from 'react-router-dom';
 import Styled from "styled-components";
 
 const Ul = Styled.ul`
@@ -9,6 +9,7 @@ const Ul = Styled.ul`
 
 const Li = Styled.li`
     margin-bottom: 10px;
+    color: #00c4b3;
 `
 
 const Button = Styled.button`
@@ -18,12 +19,14 @@ const Button = Styled.button`
 `
 
 
+
+
 const LocationsList = ({ reload }) => {
     const [locations, setLocations] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const locationsData = await(fetch('http://127.0.0.1:3333/locations').then(response => response.json()));
+            const locationsData = await(fetch(`http://127.0.0.1:3333/locations/`).then(response => response.json()));
             setLocations(locationsData);
             console.log(locationsData);
         })();
@@ -38,10 +41,10 @@ const LocationsList = ({ reload }) => {
                             {locations.map((location, index) => {
                                 return (
                                     <Li key={index}>
-                                        <Link style={{ textDecoration: 'none', color: '#333' }} to={`/locations/${location.slug}`}>
+                                        <Link style={{ textDecoration: 'none', color: '#00c4b3' }} to={`/locations/${location.slug}`}>
                                             {location.location}
+                                            <Button type="button">X</Button>
                                         </Link>
-                                        <Button type="button">X</Button>
                                     </Li>
                                 )
                             })}
