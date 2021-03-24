@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Route, Link } from 'react-router-dom';
+import { Route, useParams } from 'react-router-dom';
 import Styled from "styled-components";
 
 const Ul = Styled.ul`
@@ -8,6 +8,7 @@ const Ul = Styled.ul`
 
 const Li = Styled.li`
     margin-bottom: 10px;
+    color: #00c4b3;
 `
 
 const Button = Styled.button`
@@ -16,36 +17,55 @@ const Button = Styled.button`
     color: red;
 `
 
-const PlansList = ({ reload }) => {
+const PlansList = () => {
+    const { slug } = useParams();
     const [plans, setPlans] = useState([]);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         (async () => {
-            const PlansData = await(fetch('http://127.0.0.1:3333/plans').then(response => response.json()));
+            const PlansData = await(fetch(`http://127.0.0.1:3333/plans/${slug}`).then(response => response.json()));
             setPlans(PlansData);
             console.log(PlansData);
         })();
-    },[reload])
+    },[reload, slug])
+
+    const _handleDelete = (id) => {
+        fetch(`http://localhost:3333/plans/${id}`, {
+            method: 'DELETE'
+        });
+        setReload(reload => !reload);
+    }
 
     return (
         <>
             {!!plans.length ? (
                 <>
-                    <Route path='/locations'>
+                    <Route path='/locations/'>
                         <Ul>
                             {plans.map((plan, index) => {
                                 return (
                                     <Li key={index}>
-                                        {plan.day}--{plan.activity}
-                                        <Button type="button">X</Button>
+                                        {plan.day} - {plan.activity}
+                                        <Button type="button" onClick={() => _handleDelete(plan.id)}>X</Button>
                                     </Li>
                                 )
                             })}
                         </Ul>
+                        {/* <ul>Sunday
+                            {plans.filter((plan, index) => plan.day = 'sunday').map(filteredPlan => (
+                                <li>{filteredPlan.day}{filteredPlan.activity}</li>
+                            ))}
+                        </ul>
+                        <ul>Monday
+                            {plans.filter((plan, index) => plan.day = 'monday').map(filteredPlan => (
+                                <li>{filteredPlan.day}{filteredPlan.activity}</li>
+                            ))}
+                        </ul> */}
                     </Route>
                 </>
             ) : (
-                <p>Check if server is running...</p>
+                <p>There are no activities yet...</p>
             )}
         </>
     )

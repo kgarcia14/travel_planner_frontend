@@ -28,7 +28,7 @@ function App() {
             <AddLocation handleReload={handleReload}/>
             <LocationsList reload={reload}/>
           </Route>
-          <Route exact path="/locations/:id">
+          <Route exact path="/locations/:slug">
             <AddPlans handleReload={handleReload}/>
             <PlansList reload={reload}/>
           </Route>
