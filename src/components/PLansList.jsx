@@ -52,6 +52,16 @@ const PlansList = () => {
                                 )
                             })}
                         </Ul>
+                        {/* <ul>Sunday
+                            {plans.filter((plan, index) => plan.day = 'sunday').map(filteredPlan => (
+                                <li>{filteredPlan.day}{filteredPlan.activity}</li>
+                            ))}
+                        </ul>
+                        <ul>Monday
+                            {plans.filter((plan, index) => plan.day = 'monday').map(filteredPlan => (
+                                <li>{filteredPlan.day}{filteredPlan.activity}</li>
+                            ))}
+                        </ul> */}
                     </Route>
                 </>
             ) : (

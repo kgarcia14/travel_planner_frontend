@@ -6,6 +6,7 @@
   font-family: "Quicksand";
   color: #333;
 }
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -48,11 +49,15 @@
   border-radius: 5px;
   border: none;
   color: #fff;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
-.activity-label {
-  margin-left: 10px;
+select {
+  width: 150px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  margin-right: 10px;
 }
 
 form {
@@ -69,4 +74,11 @@ h2 {
 
 button:hover {
   cursor: pointer;
+}
+
+input {
+  width: 150px;
+  height: 21px;
+  border-radius: 5px;
+  border: 1px solid #333;
 }

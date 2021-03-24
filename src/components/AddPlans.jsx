@@ -6,7 +6,6 @@ const AddPlans = ({ handleReload }) => {
     const [day, setDay] = useState('');
     const [activity, setActivity] = useState('');
 
-
     const _handleDayChange = (event) => {
         setDay(event.target.value);
     }
@@ -41,15 +40,15 @@ const AddPlans = ({ handleReload }) => {
                 value={day}
                 onChange={_handleDayChange}>
                 <option value="">Select Day</option>
-                <option value="0">Sunday</option>
-                <option value="1">Monday</option>
-                <option value="2">Tuesday</option>
-                <option value="3">Wednesday</option>
-                <option value="4">Thursday</option>
-                <option value="5">Friday</option>
-                <option value="6">Saturday</option>
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
             </select>
-            <label className="activity-label">Activity: 
+            <label>
                 <input
                     className="activity-input"
                     type="text"

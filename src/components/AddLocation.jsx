@@ -43,10 +43,11 @@ const AddLocation = ({ handleReload }) => {
                     required
                     value={location}
                     onChange={_handleLocationChange}
-                    placeholder="Enter Location"/>
+                    placeholder="Enter Location"
+                    data-testid="messageText"/>
             </label>
             
-            <button className="add-btn" type="submit">Add Location</button>
+            <button className="add-btn" type="submit" data-testid="sendButton">Add Location</button>
             
         </form>
         
